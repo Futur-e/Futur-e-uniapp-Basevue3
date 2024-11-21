@@ -17,10 +17,12 @@
   import { VUE_APP_UPLOAD_URL} from "@/config";
 
   const deletePic = (event, index) => {
+    console.log(event, index)
     fileList.value = []
   };
   const fileList = ref([])
   const afterRead = async (event, index) => {
+    console.log(index)
     uni.uploadFile({
       url: VUE_APP_UPLOAD_URL,
       filePath: event.file[0].url,

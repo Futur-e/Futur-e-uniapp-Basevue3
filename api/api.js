@@ -1,13 +1,3 @@
-// #ifdef H5
-// h5端
-import Fly from 'flyio/dist/npm/fly'
-// #endif
-
-// #ifdef APP-PLUS
-// app端
-import Fly from 'flyio/dist/npm/wx'
-// #endif
-
 // #ifdef MP-WEIXIN
 import Fly from 'flyio/dist/npm/wx'
 // #endif
@@ -16,7 +6,6 @@ import { handleLoginFailure } from '@/utils'
 import { isWeixin } from '@/utils/util'
 import { VUE_APP_API_URL } from '@/config'
 import cookie from '@/utils/cookie'
-import { replace } from '@/utils/router'
 import { SCHOOLINFO_CHACHE_KEY } from '@/constants';
 
 const fly = new Fly()
@@ -31,15 +20,15 @@ fly.interceptors.response.use(
   error => {
 
     console.log('response008:', error)
-    if (error.toString() == 'Error: Network Error') {
+    if (error.toString() === 'Error: Network Error') {
       handleLoginFailure()
       return Promise.reject({ msg: '未登录', toLogin: true })
     }
-    if (error.status == 401) {
+    if (error.status === 401) {
       handleLoginFailure()
       return Promise.reject({ msg: '未登录', toLogin: true })
     }
-    if (error.response.data.status == 5109) {
+    if (error.response.data.status === 5109) {
       uni.showToast({
         title: error.response.data.msg,
         icon: 'none',
@@ -112,7 +101,7 @@ function baseRequest(options) {
       }
 
 
-      if (data.code == 401) {
+      if (data.code === 401) {
         uni.hideLoading()
         handleLoginFailure()
         uni.showToast({
@@ -123,7 +112,7 @@ function baseRequest(options) {
         return Promise.reject({ msg: data.msg, res, data })
       }
 
-      if (data.code != 0) {
+      if (data.code !== 0) {
         uni.showToast({
           title: data.msg,
           icon: 'none',
@@ -159,7 +148,6 @@ const request = ['post', 'put', 'patch'].reduce((request, method) => {
    * @param url string 接口地址
    * @param data object get参数
    * @param options object axios 配置项
-   * @returns {AxiosPromise}
    */
   request[method] = (url, data = {}, options = {}) => {
     console.log(url, data)
@@ -174,7 +162,6 @@ const request = ['post', 'put', 'patch'].reduce((request, method) => {
      * @param url string 接口地址
      * @param params object get参数
      * @param options object axios 配置项
-     * @returns {AxiosPromise}
      */
     request[method] = (url, params = {}, options = {}) => {
       return baseRequest(Object.assign({ url, params, method }, defaultOpt, options))
