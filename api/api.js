@@ -1,12 +1,11 @@
 // #ifdef MP-WEIXIN
 import Fly from 'flyio/dist/npm/wx'
 // #endif
-
-import { handleLoginFailure } from '@/utils'
-import { isWeixin } from '@/utils/util'
-import { VUE_APP_API_URL } from '@/config'
+import {handleLoginFailure} from '@/utils'
+import {isWeixin} from '@/utils/util'
+import {VUE_APP_API_URL} from '@/config'
 import cookie from '@/utils/cookie'
-import { SCHOOLINFO_CHACHE_KEY } from '@/constants';
+import {SCHOOLINFO_CHACHE_KEY} from '@/constants';
 
 const fly = new Fly()
 fly.config.baseURL = VUE_APP_API_URL
@@ -85,12 +84,11 @@ function baseRequest(options) {
       //console.log('res.status:',res)
       console.log('res.code:', res.code)
       // #ifdef H5
-      if (res.data.code == 1004004002) {
+      if (res.data.code === 1004004002) {
         if (isWeixin()) {
-          const url = cookie.get('index_url')
           //console.log('redirect_uri:',url)
           //const url = `${location.origin}/h5/#/pages/index/index`
-          location.href = url
+          location.href = cookie.get('index_url')
           return
         }
       }
