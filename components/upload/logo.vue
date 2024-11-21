@@ -14,7 +14,7 @@
 
 <script setup>
 	import {ref} from "vue";
-  import {TENANT_ID, VUE_APP_UPLOAD_URL} from "@/config";
+  import { VUE_APP_UPLOAD_URL} from "@/config";
 
   const deletePic = (event, index) => {
     fileList.value = []
@@ -29,7 +29,6 @@
         Authorization: 'Bearer ' + member.value.accessToken,
         lang: lang.value,
         'content-type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        'tenant-id': TENANT_ID
       },
       success(uploadFileResult) {
         if (uploadFileResult) {

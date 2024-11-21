@@ -14,7 +14,7 @@ import Fly from 'flyio/dist/npm/wx'
 
 import { handleLoginFailure } from '@/utils'
 import { isWeixin } from '@/utils/util'
-import { VUE_APP_API_URL, TENANT_ID } from '@/config'
+import { VUE_APP_API_URL } from '@/config'
 import cookie from '@/utils/cookie'
 import { replace } from '@/utils/router'
 import { SCHOOLINFO_CHACHE_KEY } from '@/constants';
